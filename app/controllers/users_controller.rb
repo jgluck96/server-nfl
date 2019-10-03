@@ -9,8 +9,9 @@ class UsersController < ApplicationController
     user = User.new(user_params)
 
     if user.valid?
-      User.create(user_params)
-      render json: UserSerializer.new(user)
+      user = User.create(user_params)
+      # byebug
+      render json: {user:UserSerializer.new(user)}
     else
       render json: {errors: 'Username already exists, try a different one.'}
     end
